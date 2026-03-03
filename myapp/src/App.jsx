@@ -1,8 +1,16 @@
+import Hello from './Hello.jsx';
+import Drink from './Drink.jsx';
+import MyComponent from './MyComponent.jsx';
+
 export default function App() {
-  return (
+
+  return(
     <>
-      <h1>Hello World !</h1>
-      <h2>This is my First Component !</h2>
-    </>   
-  )
+      <MyComponent />
+      <Drink drink='coffee' />
+      <Hello firstName='Jone' lastName='Doe'/>
+      <Hello firstName='Gildong' lastName='Hong'/>
+      <Hello firstName='Young' lastName='Kim'/>
+    </>
+  );
 }
