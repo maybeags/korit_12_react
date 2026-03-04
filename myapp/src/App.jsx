@@ -1,19 +1,15 @@
-import Hello from './Hello.jsx';
-import Drink from './Drink.jsx';
-import MyComponent from './MyComponent.jsx';
-import MyComponent2 from './MyComponent2.jsx';
+import Counter from "./Counter";
+import Counter2 from "./Counter2";
+import Counter3 from "./Counter3"; 
+import Counter4 from "./Counter4";
 
 export default function App() {
 
-  return(
-    <>
-      <MyComponent2 isLoggedin={true} />
-      <MyComponent2 isLoggedin={false} />
-      <MyComponent />
-      <Drink drink='coffee' />
-      <Hello firstName='Jone' lastName='Doe'/>
-      <Hello firstName='Gildong' lastName='Hong'/>
-      <Hello firstName='Young' lastName='Kim'/>
-    </>
-  );
+  return (
+    <> 
+      <Counter4 />
+      <Counter3 />
+      <Counter2 />
+      <Counter />
+    </>);
 }
