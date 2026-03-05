@@ -1,13 +1,11 @@
-import MyList from './MyList'
-import './App.css'
+import MyComponent from "./MyComponent";
 
-function App() {
+export default function App() {
 
-  return (
+
+  return(
     <>
-      <MyList></MyList>
+      <MyComponent></MyComponent>
     </>
-  )
+  );
 }
-
-export default App
