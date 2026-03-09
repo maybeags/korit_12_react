@@ -1,11 +1,12 @@
-import HelloComponent from './HelloComponent'
+import { useState } from 'react';
+import Review from './Review';
 import './App.css'
 
 function App() {
 
   return (
     <>
-      <HelloComponent name='김영' age='twenty' />
+      <Review />
     </>
   )
 }

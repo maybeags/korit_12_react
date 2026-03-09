@@ -1,4 +1,4 @@
 export type HelloProps = {
   name: string;
-  age: number;
+  age?: number;
 }
