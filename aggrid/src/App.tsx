@@ -24,6 +24,7 @@ function App() {
     {field: 'html_url', sortable: true, filter: true},
     {
       field: 'full_name',
+      headerName: '이동',
       cellRenderer: (params: ICellRendererParams) => (
         <button
           onClick={() => alert(params.value)}
