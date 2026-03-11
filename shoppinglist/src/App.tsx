@@ -1,5 +1,6 @@
-import { Container, AppBar, Toolbar, Typography } from '@mui/material';
+import { Container, AppBar, Toolbar, Typography, List, ListItem, ListItemText } from '@mui/material';
 import { useState } from 'react';
+import AddItem from './components/AddItem';
 import './App.css'
 
 export type Item = {
@@ -25,7 +26,21 @@ function App() {
             </Typography>
           </Toolbar>
         </AppBar>
+        <AddItem addItem={addItem}/>
+        <List>
+          {
+            items.map((item, index) => 
+              <ListItem key={index} divider>
+                <ListItemText 
+                  primary={item.product}
+                  secondary={item.amount}
+                />
+              </ListItem>
+            )
+          }
+        </List>
       </Container>
+
     </>
   );
 }

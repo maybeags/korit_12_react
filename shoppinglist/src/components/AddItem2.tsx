@@ -4,11 +4,7 @@ import { TextField, Dialog, DialogActions, DialogContent, DialogTitle, Button } 
 import { Item } from "../App";
 // 4번 라인의 경우 전에는 types.ts에서 불러왔었습니다.
 
-type AddItemProps = {
-  addItem: (item: Item) => void;
-}
-
-export default function AddItem(props: AddItemProps) {
+export default function AddItem2(props) {
   const [ open, setOpen ] = useState(false);
   const [ item, setItem ] = useState<Item>({
     product: '',
@@ -17,31 +13,28 @@ export default function AddItem(props: AddItemProps) {
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const addItem = () => {
-    props.addItem(item);    // 항목을 추가하는 상위 컴포넌트의 함수 addItem()
-    // 그다음에 TextField value를 지울겁니다.
-    setItem({product:'', amount:''});
-    handleClose();
+  const handleChange = e => {
+    setItem({...item, [e.target.name] : e.target.value})
   }
 
   return (
     <>
-      <Button onClick={handleOpen} variant="text">Add Item</Button>
+      <Button onClick={handleOpen}>Add Item2</Button>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>New Item</DialogTitle>
         <DialogContent>
           <TextField value={item.product} label='Product' margin="dense" fullWidth
-            onChange={ e => setItem({...item, product: e.target.value})}
+            onChange={handleChange} name='product'
           />
           <TextField value={item.amount} label='Amount' margin="dense" fullWidth
-            onChange={ e => setItem({...item, amount: e.target.value})}
+            onChange={handleChange} name='amount'
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>
             Cancel
           </Button>
-          <Button onClick={addItem}>
+          <Button>
             Add
           </Button>
         </DialogActions>
