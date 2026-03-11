@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { AgGridReact }from 'ag-grid-react';
-import { ColDef } from 'ag-grid-community';
+import { ColDef, ICellRendererParams } from 'ag-grid-community';
 import './App.css'
 // 이상의 코드에서 ag-grid 관련 css를 전부 지웠습니다.
 
@@ -19,9 +19,19 @@ function App() {
   const [ keyword, setKeyword ] = useState('');
   const [ repodata, setRepodata ] = useState<Repository[]>([]);
   const [ columnDefs ] = useState<ColDef[]>([
-    {field: 'id', sortable: true, filter: true}, 
+    {field: 'id', sortable: false, filter: true}, 
     {field: 'full_name', sortable: true, filter: true}, 
     {field: 'html_url', sortable: true, filter: true},
+    {
+      field: 'full_name',
+      cellRenderer: (params: ICellRendererParams) => (
+        <button
+          onClick={() => alert(params.value)}
+        >
+          Press Me ❤️
+        </button>
+      )
+    }
   ]);
 
   const handleClick = () => {
@@ -34,13 +44,15 @@ function App() {
     <div className='App'>
       <input type="text" onChange={e => setKeyword(e.target.value)} value={keyword}/>
       <button onClick={handleClick}>검색</button>
-      <div className="ag-theme-material"
+      <div
         style={{ height: 500, width: 850 }}
       >
         <AgGridReact 
           rowData={repodata}
           columnDefs={columnDefs} 
           theme={themeAlpine}
+          pagination={true}
+          paginationPageSize={5}
         />
       </div>
     </div>
