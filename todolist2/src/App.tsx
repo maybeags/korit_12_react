@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Container, Typography, TextField, Button, List, ListItem, ListItemText, IconButton, Checkbox, Box, Paper, Dialog, DialogActions, DialogContent, DialogTitle} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add'
+import DeleteIcon from '@mui/icons-material/Delete'
 import './App.css'
 
 export type Todo = {
@@ -27,7 +28,7 @@ function App() {
   // 완료 상태 토글
   const handleToggleTodo = (id: number) => {
     setTodos(
-      todos.map(todo => todo.id === id ? {...todo, competed: !todo.completed } : todo)
+      todos.map(todo => todo.id === id ? {...todo, completed: !todo.completed } : todo)
     );
   }
   // 삭제
@@ -65,7 +66,60 @@ function App() {
             새 할 일
           </Button>
         </Box>
+
+        {/** 할 일 list 출력 부분 */}
+        <List>
+          {
+            todos.map(todo => (
+              <ListItem
+                key={todo.id}
+                divider
+                secondaryAction={
+                  <IconButton edge='end' aria-label='delete' onClick={() => handleDeleteTodo(todo.id)}>
+                    <DeleteIcon color='error' />
+                  </IconButton>
+                }
+                disablePadding
+              >
+                <Checkbox
+                  edge='start'
+                  checked={todo.completed}
+                  onChange={() => handleToggleTodo(todo.id)}
+                />
+                <ListItemText
+                  primary={todo.text}
+                  sx={{ textDecoration: todo.completed ? 'line-through' : 'none'}}
+                />
+              </ListItem>
+            ))}
+        </List>
       </Paper>
+
+      {/** 추가 버튼 눌렀을 때 Dialog 모달 띄우겠습니다 */}
+      <Dialog open={open} onClose={handleCloseDialog} fullWidth maxWidth='xs'>
+        <DialogTitle>새 할 일 추가<AddIcon /></DialogTitle>
+        <DialogContent>
+          <TextField 
+            autoFocus
+            margin='dense'
+            label='할 일 입력'
+            type='text'
+            fullWidth
+            variant='outlined'
+            value={inputValue}
+            onChange={e => setInputValue(e.target.value)}
+            onKeyDown={e => {
+              if (e.key === 'Enter') {
+                handleAddTodo();
+              }
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog}>취소</Button>
+          <Button onClick={handleAddTodo} variant='contained' disableElevation>추가</Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   )
 }
